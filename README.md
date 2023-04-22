@@ -12,4 +12,5 @@
 + 게시물 상세보기 기능
 + 특정 게시물 검색기능
 + 댓글 작성, 수정, 삭제 기능
-
+## :key: ERD
+![2BF2F817-49A2-4EF2-8C73-3B646068F382](https://user-images.githubusercontent.com/94733559/233810957-767e4ce5-7811-4f9e-9a64-e8ca1d88ab23.jpeg) </br>
