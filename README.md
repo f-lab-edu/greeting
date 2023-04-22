@@ -6,4 +6,10 @@
 ## :key: Application UI
 [Apllication UI 세부](https://github.com/f-lab-edu/greeting/wiki/Application-UI) </br>
 ## :key: 주요기능
++ 게시물 작성, 수정, 삭제 기능
++ 게시물 리스트(목록) 조회 기능
++ 게시물 페이징 기능
++ 게시물 상세보기 기능
++ 특정 게시물 검색기능
++ 댓글 작성, 수정, 삭제 기능
 
