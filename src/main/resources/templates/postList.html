@@ -23,8 +23,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-            <td th:text="${list.boardIdx}"></td>
+        <tr th:if="${#lists.size(list)} >0" th:each="list : ${list}">
+            <td th:text="${list.id}"></td>
             <td th:text="${list.title}"></td>
             <td th:text="${list.userId}"></td>
             <td th:text="${list.createdDatetime}"></td>
