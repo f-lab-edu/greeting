@@ -35,10 +35,11 @@ public class PostController {
         return "/postWrite";
     }
 
-    @PostMapping("/post")
+    @PostMapping("/post_ins")
     public String doInsertPost(@ModelAttribute PostDto post) {
         postService.insertPost(post);
         return "redirect:/list";
     }
+
 
 }
