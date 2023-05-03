@@ -7,7 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface PostDao {
+
     List<PostDto> selectPostList();
 
     void insertPost(PostDto post);
+
+    PostDto selectDetail(Long id);
 }

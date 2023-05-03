@@ -20,4 +20,8 @@ public class PostService {
     public void insertPost(PostDto post) {
         postDao.insertPost(post);
     }
+
+    public PostDto selectDetail(Long id) {
+        return postDao.selectDetail(id);
+    }
 }

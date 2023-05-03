@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <h2>게시글 상세 화면</h2>
+    <table class="board_detail">
+        <colgroup>
+            <col width="15%"/>
+            <col width="35%"/>
+            <col width="15%"/>
+            <col width="35%"/>
+        </colgroup>
+        <caption>게시글 상세내용</caption>
+        <tbody>
+        <tr>
+            <th scope="row">글 번호</th>
+            <td th:text="${post.id}"></td>
+        </tr>
+        <tr>
+            <th scope="row">작성자</th>
+            <td th:text="${post.userId}"></td>
+            <th scope="row">작성일</th>
+            <td th:text="${#temporals.format(post.createdTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th scope="row">제목</th>
+            <td colspan="3" th:text="${post.title}"></td>
+        </tr>
+        <tr>
+            <th scope="row">내용</th>
+            <td th:text="${post.contents}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <button type=button title="수정" >수정</button>
+    <button type=button title="삭제" >삭제</button>
+    <input type=button value="목록"/>
+</div>
+</body>
+</html>

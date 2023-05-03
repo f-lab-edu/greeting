@@ -4,10 +4,8 @@ import com.project.greeting.dto.PostDto;
 import com.project.greeting.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,7 +19,6 @@ public class PostController {
     public ModelAndView doPost() {
 
         ModelAndView mv = new ModelAndView("/postList");
-
 
         List<PostDto> list = postService.selectPostList();
 
@@ -39,6 +36,11 @@ public class PostController {
     public String doInsertPost(@ModelAttribute PostDto post) {
         postService.insertPost(post);
         return "redirect:/list";
+    }
+    @GetMapping("/detail")
+    public String doView(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("post",postService.selectDetail(id));
+        return "/postDetail";
     }
 
 
