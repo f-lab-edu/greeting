@@ -13,4 +13,8 @@ public interface PostDao {
     void insertPost(PostDto post);
 
     PostDto selectDetail(Long id);
+
+    void deletePost(Long id);
+
+    void updatePost(PostDto post);
 }

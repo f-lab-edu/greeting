@@ -22,6 +22,16 @@ public class PostService {
     }
 
     public PostDto selectDetail(Long id) {
+
         return postDao.selectDetail(id);
+    }
+
+    public void deletePost(Long id) {
+        postDao.deletePost(id);
+    }
+
+
+    public void updatePost(PostDto post) {
+        postDao.updatePost(post);
     }
 }

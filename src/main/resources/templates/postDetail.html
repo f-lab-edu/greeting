@@ -25,7 +25,7 @@
             <th scope="row">작성자</th>
             <td th:text="${post.userId}"></td>
             <th scope="row">작성일</th>
-            <td th:text="${#temporals.format(post.createdTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#temporals.format(post.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
         <tr>
             <th scope="row">제목</th>
@@ -39,9 +39,10 @@
     </table>
 </div>
 <div>
-    <button type=button title="수정" >수정</button>
-    <button type=button title="삭제" >삭제</button>
-    <input type=button value="목록"/>
+    <button><a th:href="@{/update(id=${post.id})}">수정</a></button>
+    <button><a th:href="@{/delete(id=${post.id})}">삭제</a></button>
+    <button><a th:href="@{/list}">목록</a></button>
+
 </div>
 </body>
 </html>

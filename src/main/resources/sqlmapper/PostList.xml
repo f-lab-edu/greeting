@@ -13,7 +13,7 @@
     </select>
     <!-- 게시글 작성 -->
     <insert id="insertPost" parameterType="com.project.greeting.dto.PostDto">
-        INSERT INTO post (user_id, user_pw, title, contents, created_time)
+        INSERT INTO post (user_id, user_pw, title, contents, updated_time)
         VALUES(#{userId},#{userPw},#{title},#{contents},NOW())
     </insert>
     <!-- 게시물 상세보기-->
@@ -21,7 +21,12 @@
         SELECT * FROM post WHERE id=#{id}
     </select>
     <!-- 게시글 삭제-->
-    <delete id="deletePost" parameterType="com.project.greeting.dto.PostDto">
-        DELETE * FROM post where id=#{id}
+    <delete id="deletePost" parameterType="Long">
+        DELETE FROM post WHERE id=#{id}
     </delete>
+    <!-- 게시물 수정-->
+    <update id="updatePost" parameterType="com.project.greeting.dto.PostDto">
+        UPDATE post SET user_id=#{userId}, user_pw=#{userPw}, title=#{title}, contents=#{contents}, updated_time=NOW()
+        WHERE id=#{id}
+    </update>
 </mapper>
