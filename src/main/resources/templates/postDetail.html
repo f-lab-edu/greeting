@@ -41,7 +41,8 @@
 <div>
     <button><a th:href="@{/update(id=${post.id})}">수정</a></button>
     <button><a th:href="@{/delete(id=${post.id})}">삭제</a></button>
-    <button><a th:href="@{/list}">목록</a></button>
+    <button><a th:href="@{/list(page=${page})}">목록</a></button>
+
 
 </div>
 </body>

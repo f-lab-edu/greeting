@@ -29,4 +29,18 @@
         UPDATE post SET user_id=#{userId}, user_pw=#{userPw}, title=#{title}, contents=#{contents}, updated_time=NOW()
         WHERE id=#{id}
     </update>
+
+    <!-- 게시물 총 개수 구하기 -->
+    <select id="getCount" resultType="int">
+        SELECT count(*) as listCnt
+        FROM post
+    </select>
+
+    <select id="getListPage" parameterType="com.project.greeting.dto.PageDto" resultType="com.project.greeting.dto.PostDto">
+        SELECT *
+        FROM post
+        ORDER BY updated_time DESC
+        LIMIT #{rowCount}
+        OFFSET #{offset}
+    </select>
 </mapper>

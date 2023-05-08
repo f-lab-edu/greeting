@@ -1,6 +1,7 @@
 package com.project.greeting.service;
 
 import com.project.greeting.dao.PostDao;
+import com.project.greeting.dto.PageDto;
 import com.project.greeting.dto.PostDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,13 @@ public class PostService {
 
     public void updatePost(PostDto post) {
         postDao.updatePost(post);
+    }
+
+    public int getCount() {
+        return this.postDao.getCount();
+    }
+
+    public List<PostDto> getListPage(PageDto pageDto) {
+        return this.postDao.getListPage(pageDto);
     }
 }
