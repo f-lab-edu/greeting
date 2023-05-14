@@ -1,5 +1,6 @@
 package com.project.greeting.controller;
 
+import com.project.greeting.dto.Criteria;
 import com.project.greeting.dto.PageDto;
 import com.project.greeting.dto.PostDto;
 import com.project.greeting.service.PostService;
@@ -17,17 +18,18 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @RequestMapping("/list")
-    public String selectListAndPage(Model model,
-                                    @RequestParam(value = "page", required = false, defaultValue = "1") int page
-                                    ) {
-        PageDto pageDto = new PageDto(this.postService.getCount(), page); // 모든 게시글 개수 구하기.
+    // 게시물 리스트,페이징 및 검색
+    @GetMapping("/list")
+    public String postList(Criteria cri, Model model) {
 
-        List<PostDto> list = this.postService.getListPage(pageDto);
+        List<PostDto> postList= postService.getBoardsByCri(cri);
 
-        model.addAttribute("list", list);
-        model.addAttribute("page", page);
-        model.addAttribute("pageDto", pageDto);
+        int totalCount = postService.getCountBoardsByCri(cri);
+
+        PageDto pageDto = new PageDto(cri,totalCount);
+
+        model.addAttribute("list" , postList);
+        model.addAttribute("pageMaker", pageDto);
 
         return "/postList";
     }
@@ -48,10 +50,10 @@ public class PostController {
     //게시물 상세보기
     @GetMapping("/detail")
     public String doView(@RequestParam("id") Long id,
-                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(required = false, defaultValue = "1") int pageNum,
                          Model model) {
         model.addAttribute("post",postService.selectDetail(id));
-        model.addAttribute("page",page);
+        model.addAttribute("pageNum",pageNum);
         return "/postDetail";
     }
     //게시물 삭제
@@ -73,6 +75,7 @@ public class PostController {
         postService.updatePost(post);
         return "redirect:/list";
     }
+
 
 
 

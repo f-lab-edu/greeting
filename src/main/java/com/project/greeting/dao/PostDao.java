@@ -1,5 +1,6 @@
 package com.project.greeting.dao;
 
+import com.project.greeting.dto.Criteria;
 import com.project.greeting.dto.PageDto;
 import com.project.greeting.dto.PostDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,5 +22,11 @@ public interface PostDao {
     // 게시물
     int getCount();
 
-    List<PostDto> getListPage(PageDto pageDto);
+    List<PostDto> getListPage(PageDto paging);
+
+    //List<PostDto> getAllBoards();
+
+    List<PostDto> getBoardsByCri(Criteria cri);
+
+    int getCountBoardsByCri(Criteria cri);
 }

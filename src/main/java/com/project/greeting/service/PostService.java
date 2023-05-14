@@ -1,12 +1,15 @@
 package com.project.greeting.service;
 
 import com.project.greeting.dao.PostDao;
+import com.project.greeting.dto.Criteria;
 import com.project.greeting.dto.PageDto;
 import com.project.greeting.dto.PostDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostService {
@@ -36,11 +39,18 @@ public class PostService {
         postDao.updatePost(post);
     }
 
-    public int getCount() {
-        return this.postDao.getCount();
+
+    public List<PostDto> getBoardsByCri(Criteria cri) {
+
+        int startRow = (cri.getPageNum()-1)*cri.getAmount();
+
+        cri.setStartRow(startRow);
+
+        return postDao.getBoardsByCri(cri);
     }
 
-    public List<PostDto> getListPage(PageDto pageDto) {
-        return this.postDao.getListPage(pageDto);
+    public int getCountBoardsByCri(Criteria cri) {
+
+        return postDao.getCountBoardsByCri(cri);
     }
 }
