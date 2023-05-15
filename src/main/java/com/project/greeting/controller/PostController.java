@@ -3,7 +3,9 @@ package com.project.greeting.controller;
 import com.project.greeting.dto.Criteria;
 import com.project.greeting.dto.PageDto;
 import com.project.greeting.dto.PostDto;
+import com.project.greeting.dto.ReplyVO;
 import com.project.greeting.service.PostService;
+import com.project.greeting.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,10 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Inject
+    ReplyService replyService;
+
+
     // 게시물 리스트,페이징 및 검색
     @GetMapping("/list")
     public String postList(Criteria cri, Model model) {
@@ -30,6 +36,7 @@ public class PostController {
 
         model.addAttribute("list" , postList);
         model.addAttribute("pageMaker", pageDto);
+
 
         return "/postList";
     }
@@ -49,11 +56,19 @@ public class PostController {
     }
     //게시물 상세보기
     @GetMapping("/detail")
-    public String doView(@RequestParam("id") Long id,
+    public String doView(PostDto postDto,
+                         @RequestParam("id") Long id,
                          @RequestParam(required = false, defaultValue = "1") int pageNum,
-                         Model model) {
+                         Criteria cri,
+                         Model model) throws Exception{
         model.addAttribute("post",postService.selectDetail(id));
         model.addAttribute("pageNum",pageNum);
+        model.addAttribute("cri",cri);
+
+        // 댓글 관련 추가 부분
+        List<ReplyVO> replyList = replyService.readReply(postDto.getId());
+        model.addAttribute("replyList", replyList);
+
         return "/postDetail";
     }
     //게시물 삭제
@@ -75,7 +90,6 @@ public class PostController {
         postService.updatePost(post);
         return "redirect:/list";
     }
-
 
 
 
