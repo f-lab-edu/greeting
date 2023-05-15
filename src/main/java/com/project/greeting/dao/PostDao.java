@@ -19,14 +19,8 @@ public interface PostDao {
     void deletePost(Long id);
     // 게시물 수정
     void updatePost(PostDto post);
-    // 게시물
-    int getCount();
 
-    List<PostDto> getListPage(PageDto paging);
-
-    //List<PostDto> getAllBoards();
-
+    // 게시물 검색
     List<PostDto> getBoardsByCri(Criteria cri);
-
     int getCountBoardsByCri(Criteria cri);
 }

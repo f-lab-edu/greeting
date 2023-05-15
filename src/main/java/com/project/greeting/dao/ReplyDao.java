@@ -9,4 +9,6 @@ import java.util.List;
 public interface ReplyDao {
 
     List<ReplyVO> readReply(int postId) throws Exception;
+
+    void writeReply(ReplyVO vo);
 }

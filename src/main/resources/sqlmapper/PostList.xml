@@ -69,12 +69,4 @@
       LIMIT #{startRow},#{amount}
     ]]>
     </select>
-    <!--댓글 조회-->
-        <select id="readReply" resultType="com.project.greeting.dto.ReplyVO">
-            SELECT id, user_id, contents,
-            DATE_FORMAT(created_time,'%Y.%m.%d.%H.%i') AS created_time,
-            DATE_FORMAT(updated_time,'%Y.%m.%d.%H.%i') AS updated_time
-            FROM comment
-            WHERE post_id=#{postId}
-        </select>
 </mapper>

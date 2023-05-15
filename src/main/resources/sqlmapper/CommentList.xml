@@ -12,4 +12,9 @@
         FROM comment
         WHERE post_id=#{postId}
     </select>
+    <!--댓글 작성-->
+    <insert id="writeReply" parameterType="com.project.greeting.dto.ReplyVO">
+        INSERT INTO comment (post_id,user_id,user_pw,contents,updated_time)
+        VALUES(#(postId),#(userId),#(userPw),#(contents),NOW())
+    </insert>
 </mapper>

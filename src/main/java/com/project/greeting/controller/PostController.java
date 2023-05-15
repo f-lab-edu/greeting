@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @Inject
+    @Autowired
     ReplyService replyService;
 
 
@@ -54,7 +55,7 @@ public class PostController {
         postService.insertPost(post);
         return "redirect:/list";
     }
-    //게시물 상세보기
+    //게시물 상세보기 & 댓글 리스트
     @GetMapping("/detail")
     public String doView(PostDto postDto,
                          @RequestParam("id") Long id,
@@ -91,6 +92,18 @@ public class PostController {
         return "redirect:/list";
     }
 
+    // 댓글 작성
+    @PostMapping("/replyWrite")
+    public String replyWrite(ReplyVO vo, Criteria cri, RedirectAttributes rttr) {
+
+        replyService.writeReply(vo);
+
+        rttr.addAttribute("post_id", vo.getPostId());
+        rttr.addAttribute("pageNum",cri.getPageNum());
+        rttr.addAttribute("amount", cri.getAmount());
+
+        return "redirect:/detail";
+    }
 
 
 }
