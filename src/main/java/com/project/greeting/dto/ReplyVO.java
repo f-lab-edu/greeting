@@ -6,8 +6,9 @@ import java.time.LocalDateTime;
 
 @Data
 public class ReplyVO {
-    private int id;             // 댓글 번호
-    private int postId;         // 게시글 번호
+
+    private int replyId;             // 댓글 번호
+    private int id;         // 게시글 번호
     private String userId;
     private String userPw;
     private String contents;

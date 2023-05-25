@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface ReplyDao {
 
-    List<ReplyVO> readReply(int postId) throws Exception;
-
-    void writeReply(ReplyVO vo);
+   public List<ReplyVO> readReply(int id) throws Exception;
+   public void writeReply(ReplyVO replyVO) throws Exception;
+   public void replyUpdate(ReplyVO replyVO);
+   public ReplyVO selectReply(int replyId);
+   public void replyDelete(ReplyVO replyVO) throws Exception ;
 }

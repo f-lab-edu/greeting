@@ -6,15 +6,30 @@
 <mapper namespace="replyMapper">
     <!--댓글 조회-->
     <select id="readReply" resultType="com.project.greeting.dto.ReplyVO">
-        SELECT id, user_id, contents,
+        SELECT reply_id, user_id, contents,
         DATE_FORMAT(created_time,'%Y.%m.%d.%H.%i') AS created_time,
         DATE_FORMAT(updated_time,'%Y.%m.%d.%H.%i') AS updated_time
         FROM comment
-        WHERE post_id=#{postId}
+        WHERE id=#{id}
     </select>
     <!--댓글 작성-->
     <insert id="writeReply" parameterType="com.project.greeting.dto.ReplyVO">
-        INSERT INTO comment (post_id,user_id,user_pw,contents,updated_time)
-        VALUES(#(postId),#(userId),#(userPw),#(contents),NOW())
+        INSERT INTO comment (id, user_id, user_pw, contents, updated_time)
+        VALUES(#{id}, #{userId}, #{userPw}, #{contents}, NOW())
     </insert>
+    <!-- 댓글 수정-->
+    <update id="updateReply" parameterType="com.project.greeting.dto.ReplyVO">
+        UPDATE comment SET id=#{id},user_id=#{userId},user_pw=#{userPw},contents=#{contents}
+        WHERE reply_id=#{replyId}
+    </update>
+    <!-- 댓글 삭제-->
+    <delete id="deleteReply" parameterType="com.project.greeting.dto.ReplyVO">
+        DELETE FROM comment WHERE reply_id=#{replyId}
+    </delete>
+    <!-- 선택된 댓글 조회 -->
+    <select id="selectReply" resultType="com.project.greeting.dto.ReplyVO">
+        SELECT reply_id, id, user_id, user_pw, contents, updated_time
+        FROM comment
+        WHERE reply_id=#{replyId}
+    </select>
 </mapper>

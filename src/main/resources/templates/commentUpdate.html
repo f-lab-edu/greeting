@@ -8,23 +8,22 @@
 </head>
 <body>
 <div class="container">
-    <h2>게시판 수정</h2>
-    <form id="frm" name="frm" method="post" action="/update">
-        <table class="board_update">
+    <h2>댓글 수정</h2>
+    <form id="frm" name="frm" method="post" action="/replyUpdate">
+        <table class="comment_update">
             <tr>
+                <input type="hidden" id="id" name="id" th:value="${replyUpdate.id}"/>
                 <td>글번호</td>
-                <td><input type="text" id="id" name="id" th:value="${board.id}" readonly></td>
+                <td><input type="text" id="replyId" name="replyId" th:value="${replyUpdate.replyId}" readonly></td>
                 <td>아이디</td>
-                <td><input type="text" id="userId" name= "userId" th:value="${board.userId}"></td>
+                <td><input type="text" id="userId" name="userId" th:value="${replyUpdate.userId}"></td>
                 <td>비밀번호</td>
-                <td><input type="text" id="userPw" name="userPw" th:value="${board.userPw}"></td>
-                <td>제목</td>
-                <td><input type="text" id="title" name="title" th:value="${board.title}"></td>
+                <td><input type="text" id="userPw" name="userPw" th:value="${replyUpdate.userPw}"></td>
             </tr>
             <tr>
                 <td colspan="4" class="view_text">
                             <textarea title="내용" id="contents" name="contents"
-                                      th:text="${board.contents}"></textarea>
+                                      th:text="${replyUpdate.contents}"></textarea>
                 </td>
             </tr>
         </table>
