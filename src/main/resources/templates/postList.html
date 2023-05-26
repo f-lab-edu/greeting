@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="<http://www.thymeleaf.org>">
+<html lang="ko" xmlns:th="<http://www.thymeleaf.org>" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <title>board</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"></link>
@@ -11,7 +11,7 @@
         <colgroup>
             <col width="15%"/>
             <col width="*"/>
-            <col width="15%"/>
+            <col width="*"/>
             <col width="25%"/>
         </colgroup>
         <thead>
@@ -24,13 +24,37 @@
         </thead>
         <tbody>
         <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-            <td th:text="${list.boardIdx}"></td>
-            <td th:text="${list.title}"></td>
+            <td th:text="${list.id}"></td>
+            <td> <a th:text="${list.title}" th:href="@{/detail(id=${list.id},pageNum=${pageMaker.cri.pageNum})}"></a></td>
             <td th:text="${list.userId}"></td>
-            <td th:text="${list.createdDatetime}"></td>
+            <td th:text="${list.updatedTime}"></td>
         </tr>
         <a href="/post_ins" class="btn">글 쓰기</a>
     </table>
+</div>
+<div id = "pagination">
+    <span th:if="${pageMaker.prev == true}">
+        <a th:href="@{'/list?pageNum='+${pageMaker.startPage-1}}" th:text="Prev"></a>
+    </span>
+    <span th:each="pageNum : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+        <a class="div2" th:href="@{'/list?pageNum='+${pageNum}}" th:text="|&emsp;${pageNum}&emsp;|"></a>
+    </span>
+    <span th:if="${pageMaker.next == true}">
+        <a th:href="@{'/list?pageNum='+|${pageMaker.endPage + 1}|}" th:text="Next"></a>
+    </span>
+</div>
+<!-- 검색 form -->
+<div id="search">
+    <form id="searchForm" action="list" methos="get">
+        <select name="type">
+            <option value="">선택</option>
+            <option value="title">제목</option>
+            <option value="contents">내용</option>
+            <option value="userId">작성자</option>
+        </select>
+        <input type="text" name="keyword" />
+        <button id="searchBtn">검색</button>
+    </form>
 </div>
 </body>
 </html>

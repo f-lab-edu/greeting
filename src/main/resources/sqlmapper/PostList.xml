@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.greeting.dao.PostDao">
+    <!-- 게시판 조회 -->
+    <select id="selectPostList" resultType="com.project.greeting.dto.PostDto">
+        SELECT id, title, user_id,
+        DATE_FORMAT(created_time,'%Y.%m.%d.%H.%i') AS created_time,
+        DATE_FORMAT(updated_time,'%Y.%m.%d.%H.%i') AS updated_time
+        FROM post
+    </select>
+    <!-- 게시글 작성 -->
+    <insert id="insertPost" parameterType="com.project.greeting.dto.PostDto">
+        INSERT INTO post (user_id, user_pw, title, contents, updated_time)
+        VALUES(#{userId},#{userPw},#{title},#{contents},NOW())
+    </insert>
+    <!-- 게시물 상세보기-->
+    <select id="selectDetail" parameterType="Long" resultType="com.project.greeting.dto.PostDto">
+        SELECT * FROM post WHERE id=#{id}
+    </select>
+    <!-- 게시글 삭제-->
+    <delete id="deletePost" parameterType="Long">
+        DELETE FROM post WHERE id=#{id}
+    </delete>
+    <!-- 게시물 수정-->
+    <update id="updatePost" parameterType="com.project.greeting.dto.PostDto">
+        UPDATE post SET user_id=#{userId}, user_pw=#{userPw}, title=#{title}, contents=#{contents}, updated_time=NOW()
+        WHERE id=#{id}
+    </update>
+    <!-- 게시물 총 개수 구하기 -->
+    <select id="getCountBoardsByCri" resultType="int">
+        <![CDATA[
+    SELECT COUNT(*)
+    FROM post
+   ]]>
+        <where>
+            <if test= "type == 'title'.toString()">
+                title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test= "type == 'contents'.toString()">
+                contents LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test= "type == 'userId'.toString()">
+                user_id LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+    <!-- 게시물 검색 -->
+    <select id="getBoardsByCri" resultType="com.project.greeting.dto.PostDto">
+        <![CDATA[
+      SELECT *
+      FROM post
+    ]]>
+        <where>
+            <if test="type == 'title'.toString() ">
+                title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="type == 'contents'.toString() ">
+                contents LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="type == 'userId'.toString() ">
+                user_id LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        <![CDATA[
+      ORDER BY updated_time DESC
+      LIMIT #{startRow},#{amount}
+    ]]>
+    </select>
+</mapper>

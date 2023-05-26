@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"
+          href="../../css/style.css"></link>
+</head>
+<body>
+<div class="container">
+    <h2>댓글 삭제</h2>
+    <form id="frm" name="frm" method="post" action="/replyDelete">
+        <table class="comment_update">
+            <tr>
+                <input type="hidden" id="id" name="id" th:value="${replyDelete.id}"/>
+                <td>글번호</td>
+                <td><input type="text" id="replyId" name="replyId" th:value="${replyDelete.replyId}" readonly></td>
+                <td>아이디</td>
+                <td><input type="text" id="userId" name="userId" th:value="${replyDelete.userId}"></td>
+                <td>비밀번호</td>
+                <td><input type="text" id="userPw" name="userPw" th:value="${replyDelete.userPw}"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="view_text">
+                            <textarea title="내용" id="contents" name="contents"
+                                      th:text="${replyDelete.contents}"></textarea>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="delete_btn">삭제</button>
+        <button><a th:href="@{/detail(id=${replyDelete.id})}">취소</a></button>
+    </form>
+</div>
+</body>
+</html>

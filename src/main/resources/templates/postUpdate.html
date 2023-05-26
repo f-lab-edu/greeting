@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"
+          href="../../css/style.css"></link>
+</head>
+<body>
+<div class="container">
+    <h2>게시판 수정</h2>
+    <form id="frm" name="frm" method="post" action="/update">
+        <table class="board_update">
+            <tr>
+                <td>글번호</td>
+                <td><input type="text" id="id" name="id" th:value="${board.id}" readonly></td>
+                <td>아이디</td>
+                <td><input type="text" id="userId" name= "userId" th:value="${board.userId}"></td>
+                <td>비밀번호</td>
+                <td><input type="text" id="userPw" name="userPw" th:value="${board.userPw}"></td>
+                <td>제목</td>
+                <td><input type="text" id="title" name="title" th:value="${board.title}"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="view_text">
+                            <textarea title="내용" id="contents" name="contents"
+                                      th:text="${board.contents}"></textarea>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" id="submit" value="저장" class="btn">
+    </form>
+</div>
+</body>
+</html>
